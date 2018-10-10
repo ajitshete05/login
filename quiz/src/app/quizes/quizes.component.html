@@ -1,0 +1,24 @@
+<iframe src="http://free.timeanddate.com/countdown/i6g4ol0f/n505/cf12/cm0/cu4/ct0/cs0/ca0/cr0/ss0/cac000/cpc000/pcfff/tcfff/fs100/szw320/szh135/tatTime%20left%20to%20Event%20in/tac000/tptTime%20since%20Event%20started%20in/tpc000/mac000/mpc000/iso2018-10-08T00:00:00" allowTransparency="true" frameborder="0" width="181" height="69"></iframe>
+
+<div class="col-md-6 col-md-offset-3">
+  <span><div *ngIf="!user.done">
+  <h5><strong>{{user.count + 1}}</strong> {{currentQuiz.question}}</h5>
+  <ul>
+    <li *ngFor="let item of currentQuiz.options; let ind = index" class="radio">
+      <label><input type="radio" name="answer" [value]="ind" (click)="currentQuiz.selected = ind" [checked]="currentQuiz.selected == ind">{{item}}</label></li>
+  </ul>
+  <div class='myDiv'>
+  <button class="btn default-btn" style='margin-right:16px' (click)="getQuestion('prev')" [disabled]="user.count === 0">Prev</button>
+  <button class="btn default-btn" style='margin-right:16px' (click)="getQuestion('next')" *ngIf="user.count != quizes.length-1">Next</button>
+  <button class="btn btn-success" style='margin-right:16px' (click)="getGrade()" *ngIf="user.count == quizes.length-1">Done</button>
+</div>
+</div>
+
+<div *ngIf="user.done">
+  <h4 class="text-success" *ngIf="user.totalScore >= minScore">Well done! Your score {{user.totalScore}} from {{maxScore}}.</h4>
+  <h4 class="text-danger" *ngIf="user.totalScore < minScore">Ooops! Your score only {{user.totalScore}} from {{maxScore}}.</h4>
+  <button class="btn default-btn" (click)="repeatQuiz()">Repeat Quiz</button>
+</div>
+
+</span>
+</div>
